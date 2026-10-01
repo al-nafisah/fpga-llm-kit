@@ -1,7 +1,7 @@
 [project]
 name = "fpga-llm-kit"
 version = "0.1.0"
-description = "Fit a pretrained language model into an FPGA with limited memory, and check the RTL bit for bit"
+description = "Compress a pretrained language model to fit an FPGA, measure what it costs on standard benchmarks, and check the RTL bit for bit"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "Abdullah Al-Nafisah" }]
