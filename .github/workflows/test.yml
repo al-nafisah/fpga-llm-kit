@@ -1,0 +1,15 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - run: uv sync --locked
+      # Exit code 5 means pytest found no tests, which holds only until the first issue lands.
+      - run: uv run pytest || [ $? -eq 5 ]

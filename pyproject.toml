@@ -1,0 +1,19 @@
+[project]
+name = "fpga-llm-kit"
+version = "0.1.0"
+description = "Fit a pretrained language model into an FPGA with limited memory, and check the RTL bit for bit"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Abdullah Al-Nafisah" }]
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "tb"]
