@@ -25,6 +25,43 @@ integer weights, a descriptor of its sizes, and a few tables. One RTL build runs
 fits within its maximum sizes. [docs/design.md](docs/design.md) has the number format, the
 compression methods and why.
 
+## Quick start
+
+Step 1 works today. The planner reads only a model's config and tensor headers, never its
+weights:
+
+```bash
+uv sync
+uv run flk plan HuggingFaceTB/SmolLM2-135M --board kv260
+```
+
+```
+Model   HuggingFaceTB/SmolLM2-135M: llama, 134.5 M parameters, 256.6 MiB as stored
+        30 layers, width 576, FFN 1536, vocabulary 49,152
+        9 query heads and 3 KV heads of 64; silu gate; lm_head shares the embedding
+Board   AMD Kria KV260 (XCK26-SFVC784-2LV-C)
+        4,096 MiB DDR4 at 19.2 GB/s peak, 2.9 MiB on chip, 1,248 DSPs
+Build   int4 weights in groups of 32, int8 KV cache, context 2048
+        32 multiply-adds per cycle at 200 MHz, DRAM at 70% of peak
+
+Memory                         MiB
+  weights                      68.9
+  norms and biases             0.07
+  KV cache                     22.9   2,048 tokens
+  in DRAM                      91.8   of 3,072.0 free, fits
+  on chip, estimated           0.02   of 2.9, fits
+  longest context that fits: 8,192 tokens, the model's own limit
+
+Per token, at token 2,048
+  read from DRAM        91.8 MiB   at most 139.6 tokens/s
+  multiply-adds        205.3 M     at most 31.2 tokens/s
+  compute-bound: 144 multiply-adds per cycle would reach the DRAM limit (1,248 DSPs on this board)
+```
+
+A model is a Hugging Face repo id, a local folder, or a snapshot from
+`flk inspect <model> --json`. Gated repos need `HF_TOKEN`. `flk boards` lists the boards; add
+your own by copying a file from `src/fpga_llm_kit/boards/`.
+
 ## What the literature says
 
 [docs/literature.md](docs/literature.md) reviews the state of the art in quantization, pruning,
@@ -87,9 +124,10 @@ token, so bytes per token is the number compression has to cut.
 | Path | What |
 |---|---|
 | `src/fpga_llm_kit/` | Python: model import, planner, compression, bit-exact reference, evaluation |
+| `src/fpga_llm_kit/boards/` | one TOML per board, every number with its source |
 | `rtl/` | SystemVerilog, vendor-neutral |
 | `tb/` | cocotb testbenches, one per RTL module, run under Verilator |
-| `tests/` | Python unit tests |
+| `tests/` | Python unit tests; `tests/models/` holds model snapshots so they run offline |
 | `docs/` | the design, the literature review and its figures |
 
 ## License

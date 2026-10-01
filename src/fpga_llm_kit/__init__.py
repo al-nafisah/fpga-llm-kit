@@ -1,1 +1,2 @@
-"""Fit a pretrained language model into an FPGA, and check the RTL against a bit-exact reference."""
+"""Compress a pretrained language model to fit an FPGA, measure what that costs, and check the
+RTL against a bit-exact reference."""

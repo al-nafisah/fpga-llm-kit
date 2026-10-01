@@ -1,0 +1,18 @@
+name = "AMD Alveo U55C"
+part = "XCU55C-L2FSVH2892E"
+
+[fabric]
+luts = 1304000         # AMD gives 1,304K
+dsps = 9024
+bram_kbits = 72576     # 70.9 Mb of block RAM
+uram_kbits = 276480    # 960 UltraRAMs of 288 Kb
+
+[dram]                 # HBM2 in the package; a PCIe card, the host keeps nothing here
+type = "HBM2"
+mib = 16384
+bus_bits = 2048        # 32 channels of 64 bits; one AXI port reaches one channel, 1/32 of the peak
+mts = 1800
+
+[sources]
+fabric = "https://docs.amd.com/r/en-US/ds978-u55c/FPGA-Resource-Information"
+dram = "https://docs.amd.com/api/khub/maps/jBy7Lf0ukySp4TFAfKhJJQ/topics/Q36MPWW3kkhuzzXYHoEr5A/content"

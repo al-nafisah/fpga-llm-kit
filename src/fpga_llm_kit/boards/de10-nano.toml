@@ -1,0 +1,19 @@
+name = "Terasic DE10-Nano"
+part = "5CSEBA6U23I7"
+
+[fabric]               # Intel's Cyclone V documents disagree on the ALM and M10K counts;
+                       # these are from the device overview's resource table
+alms = 41910
+dsps = 112             # variable-precision blocks, each two 18x18 multipliers
+bram_kbits = 5570      # M10K blocks
+
+[dram]                 # on the hard processor; the fabric reaches it through the FPGA-to-SDRAM port
+type = "DDR3"
+mib = 1024
+bus_bits = 32
+mts = 800
+reserved_mib = 256     # assumption: kept by Linux on the Cortex-A9 cores
+
+[sources]
+fabric = "https://media.digikey.com/pdf/Data%20Sheets/Intel%20PDFs/Cyclone_V_Device_Overview_Web.pdf"
+dram = "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046&PartNo=2"

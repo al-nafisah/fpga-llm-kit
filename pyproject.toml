@@ -8,6 +8,9 @@ authors = [{ name = "Abdullah Al-Nafisah" }]
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+flk = "fpga_llm_kit.cli:main"
+
 [dependency-groups]
 dev = ["pytest>=8"]
 

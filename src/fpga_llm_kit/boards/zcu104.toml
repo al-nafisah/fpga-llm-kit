@@ -1,0 +1,19 @@
+name = "AMD ZCU104"
+part = "XCZU7EV-2FFVC1156"
+
+[fabric]
+luts = 230400
+dsps = 1728            # DSP48E2
+bram_kbits = 11232     # 312 block RAMs of 36 Kb
+uram_kbits = 27648     # 96 UltraRAMs of 288 Kb
+
+[dram]                 # the processing system's DDR4; the fabric's SODIMM socket ships empty
+type = "DDR4"
+mib = 2048
+bus_bits = 64
+mts = 2400
+reserved_mib = 1024    # assumption: kept by Linux on the Cortex-A53 cores; 0 for bare metal
+
+[sources]
+fabric = "https://docs.amd.com/v/u/en-US/ds891-zynq-ultrascale-plus-overview"
+dram = "https://docs.amd.com/v/u/en-US/ug1267-zcu104-eval-bd"

@@ -1,0 +1,18 @@
+name = "TUL PYNQ-Z2"
+part = "XC7Z020-1CLG400C"
+
+[fabric]
+luts = 53200
+dsps = 220             # DSP48E1
+bram_kbits = 5040      # 140 block RAMs of 36 Kb
+
+[dram]                 # on the processing system
+type = "DDR3"
+mib = 512
+bus_bits = 16
+mts = 1050
+reserved_mib = 256     # assumption: kept by the PYNQ Linux image on the Cortex-A9 cores
+
+[sources]
+fabric = "https://docs.amd.com/v/u/en-US/ds190-Zynq-7000-Overview"
+dram = "https://dpoauwgwqsy2x.cloudfront.net/Download/PYNQ_Z2_User_Manual_v1.1.pdf"

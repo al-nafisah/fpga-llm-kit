@@ -1,0 +1,19 @@
+name = "AMD Kria KV260"
+part = "XCK26-SFVC784-2LV-C"
+
+[fabric]
+luts = 117120
+dsps = 1248            # DSP48E2
+bram_kbits = 5184      # 144 block RAMs of 36 Kb
+uram_kbits = 18432     # 64 UltraRAMs of 288 Kb
+
+[dram]                 # on the processing system; the fabric reaches it through PS ports
+type = "DDR4"
+mib = 4096
+bus_bits = 64
+mts = 2400
+reserved_mib = 1024    # assumption: kept by Linux on the Cortex-A53 cores; 0 for bare metal
+
+[sources]
+fabric = "https://docs.amd.com/r/en-US/ds987-k26-som/Programmable-Logic"
+dram = "https://docs.amd.com/r/en-US/ds987-k26-som/Functional-Overview-and-Block-Diagram"

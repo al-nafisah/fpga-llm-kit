@@ -1,0 +1,18 @@
+name = "Digilent Arty A7-100T"
+part = "XC7A100TCSG324-1"
+
+[fabric]
+luts = 63400
+dsps = 240             # DSP48E1
+bram_kbits = 4860      # 135 block RAMs of 36 Kb
+
+[dram]                 # on the fabric, through a soft MIG controller; no hard CPU
+type = "DDR3L"
+mib = 256
+bus_bits = 16
+mts = 667              # the -1 speed grade's DDR3L limit
+
+[sources]
+fabric = "https://docs.amd.com/v/u/en-US/7-series-product-selection-guide"
+dram = "https://digilent.com/reference/programmable-logic/arty-a7/reference-manual"
+dram_rate = "https://docs.amd.com/v/u/en-US/ds181_Artix_7_Data_Sheet"
